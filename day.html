@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>one month</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+
+        }
+        html,
+        body{
+           height: 100%;
+           overflow-x: hidden;
+           font-size: 0.3rem;
+           
+        }
+        p{
+            text-align: center;
+        }
+        .time{
+           
+            position: fixed;
+            top: 0;
+            z-index: 20;
+            background: #fff;
+            height: 0.5rem;
+            width: 100%;
+        }
+        .content{
+            padding-top: 0.5rem;
+          
+        }
+        .tree{
+            height: 3rem;
+            background: url('./tree.jfif') no-repeat center;
+            background-size: contain;
+            position: relative;
+            animation: treerun  5s;
+        }
+        .wx{
+            height: 2rem;
+            background: url('./wx.jpg') no-repeat center;
+            background-size: contain;
+            position: relative;
+            animation: wx  0.5s infinite;
+        }
+        .bc{
+            height: 1rem;
+            line-height: 0.98rem;
+            font-size: 0.4rem;
+            color: red;
+        }
+        .tree p{
+            text-align: center;
+        }
+        .dx{
+            animation: mover2  1s infinite;
+            font-size: 0.5rem;
+        }
+        .target{
+          
+            font-size: 0.5rem;
+        }
+        @keyframes treerun{
+            0%{
+                left: 100%;
+            }
+            100%{
+                left: 0;
+            }
+        }
+        @keyframes wx{
+            0%{
+                left:0;
+                top: 0;
+            }
+            25%{
+                left:-1px;
+                top: 0;
+            }
+            50%{
+                left:-1px;
+                top: -1px;
+            }
+            75%{
+                left:1px;
+                top: -1px;
+            }
+            100%{
+                left:1px;
+                top: 1px;
+            }
+        }
+        @keyframes pleft{
+            0%{
+                left: 100%;
+            }
+            100%{
+                left: 0;
+            }
+        }
+        @keyframes pshow{
+            0%{
+                opacity: 0;
+            }
+            100%{
+                opacity: 1;
+            }
+        }
+       
+        @keyframes mover2 {
+            40% {
+                opacity:1;
+                color:#ff0016
+            }
+            60% {
+                color:#0034fd
+            }
+            80% {
+                opacity:.8
+            }
+            100% {
+                opacity:1
+            }
+        }
+        .target{
+            text-align: center;
+            color:#ff0016;
+            animation: rightEaseInAnimate 2s ease 1; /*调用动画：动画名、时间、时间线条、播放次数*/
+            animation-fill-mode: forwards;/*定义动画结束的状态*/
+    }
+    @keyframes rightEaseInAnimate{/*定义从右边滑入文字的动画*/
+        0%{transform: translateX(500px);opacity: 0;}
+        100%{transform:translateX(0px);opacity: 1; }
+    }
+    </style>
+</head>
+<body>
+    <div>
+        <p class="time"></p>
+        <div class="content">
+                <p>缘起2020年1月23日</p>
+                <div class="tree">
+                    <p class="bc">D2246</p>
+                </div>
+                
+                <p class="dx">
+                    一袋酸奶 <-> 一个面包
+                </p>
+                <div class="wx"></div>
+                <p>......</p>
+                <p>....</p>
+                <p>......</p>
+                <p>现在2020年2月23日</p>
+                <p class="target">纪念一起度过的一个月</p>
+                <audio src="./1.mp3" loop></audio>
+                
+        </div>
+       
+    </div>
+    <script>
+        window.onresize = getRem;
+        function getRem(){
+            document.documentElement.style.fontSize = document.documentElement.offsetWidth / 6.4+'px';
+        }
+        getRem();
+    </script>
+    <script>
+        document.addEventListener('touchstart', function () {
+            function audioAutoPlay() {
+                var audio = document.querySelector('audio');
+                    audio.play();
+              
+            }
+            audioAutoPlay();
+        });
+        refreshTime();
+        setInterval(function(){
+            refreshTime();
+        },1000)
+        function refreshTime(){
+            var start = '2020-01-23 10:15';
+            var startTime = new Date(start).getTime();
+            var nowTime = new Date().getTime();
+            var diff = nowTime - startTime;
+            var diffTime = new Date(diff);
+            var day = parseInt(diffTime / (24*60*60*1000));
+            diffTime=diffTime%(24*60*60*1000);
+            var hour = parseInt(diffTime/(60*60*1000));    
+            var diff=diff%(60*60*1000);
+            var minute=parseInt(diff/(60*1000));
+            diff=diff%(60*1000);
+            var seconde=parseInt(diff/1000);
+            var str = '<span>'+day+'</span>天<span>'+hour+'</span>小时<span>'+minute+'</span>分<span>'+seconde+'</span>秒';
+            document.querySelector('p').innerHTML = str;
+        }
+    
+
+    </script>
+</body>
+</html>
